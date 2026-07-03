@@ -141,14 +141,29 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 1.1rem clamp(1.25rem, 4vw, 4rem);
-  transition: background 0.4s var(--ease-out-expo), backdrop-filter 0.4s,
-    padding 0.4s var(--ease-out-expo), border-color 0.4s;
-  border-bottom: 1px solid transparent;
+  transition: padding 0.4s var(--ease-out-expo);
 }
-.nav--condensed {
+/* Condensed background lives on a separate layer, NOT on .nav itself.
+   backdrop-filter (like filter/transform) turns the element into the
+   containing block for its position:fixed descendants — which would pin the
+   mobile menu drawer to the short header bar instead of the viewport once the
+   nav condenses on scroll. Keeping the blur on ::before leaves .nav filter-free
+   so the fixed drawer always resolves against the viewport. */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s var(--ease-out-expo), backdrop-filter 0.4s,
+    border-color 0.4s;
+}
+.nav--condensed::before {
   background: rgba(15, 17, 21, 0.72);
   backdrop-filter: blur(14px) saturate(140%);
   border-bottom: 1px solid var(--hairline);
+}
+.nav--condensed {
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
 }

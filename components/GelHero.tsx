@@ -150,6 +150,21 @@ export default function GelHero() {
               <stop offset="0%" stopColor="#c9d8ea" stopOpacity="0.14" />
               <stop offset="100%" stopColor="#c9d8ea" stopOpacity="0" />
             </linearGradient>
+            {/* Soft horizontal falloff for the lane smears so their left/right
+                edges dissolve into the field instead of reading as hard-edged
+                rectangles. Critical on narrow viewports, where slice-scaling
+                crops to a few magnified lanes and any hard edge looks tiled.
+                objectBoundingBox units let one mask fade every smear by its own
+                width. */}
+            <linearGradient id="laneEdgeFade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#fff" stopOpacity="0" />
+              <stop offset="20%" stopColor="#fff" stopOpacity="1" />
+              <stop offset="80%" stopColor="#fff" stopOpacity="1" />
+              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+            </linearGradient>
+            <mask id="laneEdgeMask" maskContentUnits="objectBoundingBox">
+              <rect x="0" y="0" width="1" height="1" fill="url(#laneEdgeFade)" />
+            </mask>
             {/* Roughens + softens the sharp band cores: turbulence displaces the
                 edges (the gel "smile"/wobble) then a small blur fuzzes them. */}
             <filter id="bandWarp" x="-25%" y="-260%" width="150%" height="620%">
@@ -191,6 +206,7 @@ export default function GelHero() {
               width={LANE_W - 28}
               height={300}
               fill="url(#smearGrad)"
+              mask="url(#laneEdgeMask)"
             />
           ))}
 
