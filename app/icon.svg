@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Li Lab">
+  <defs>
+    <linearGradient id="lli-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7cb6ec"/>
+      <stop offset="1" stop-color="#2f74b8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- black circle -->
+  <circle cx="64" cy="64" r="64" fill="#0b0d10"/>
+
+  <!-- white + blue mark, scaled to sit inside the circle -->
+  <g transform="translate(64 64) scale(0.98) translate(-63 -65)">
+    <path d="M40 28 V98 H86" fill="none" stroke="#ffffff" stroke-width="12"
+          stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M64 16 C44 34 44 50 64 66 C84 82 84 98 64 114" fill="none"
+          stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+    <g stroke="#ffffff" stroke-width="5" stroke-linecap="round">
+      <line x1="54" y1="30" x2="74" y2="30"/>
+      <line x1="51" y1="42" x2="77" y2="42"/>
+      <line x1="77" y1="88" x2="51" y2="88"/>
+      <line x1="74" y1="100" x2="54" y2="100"/>
+    </g>
+    <path d="M64 16 C84 34 84 50 64 66 C44 82 44 98 64 114" fill="none"
+          stroke="url(#lli-blue)" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
